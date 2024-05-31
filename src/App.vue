@@ -1,6 +1,16 @@
 <template>
   <div id="app" class="bg-primary">
-    <b-button size="lg">Button</b-button>
-    <router-view/>
+    <div id="game" class="pt-4">
+      <TrafficStopView/>
+    </div>
   </div>
 </template>
+<script>
+  import TrafficStopView from './views/TrafficStopView.vue'
+  export default {
+    name: "App",
+    components: {
+      TrafficStopView
+    }
+  }
+</script>
