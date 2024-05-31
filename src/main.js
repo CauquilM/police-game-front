@@ -11,6 +11,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.use(BootstrapVue)
 
+export const eventBus = new Vue();
+
 Vue.config.productionTip = false
 
 new Vue({

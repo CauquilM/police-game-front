@@ -3,12 +3,14 @@
         <b-card :header="vehicle.licensePlate" header-tag="header" :title="vehicle.vehicleType">
             <b-card-text>Insurance: {{ vehicle.insurance }}</b-card-text>
             <b-card-text>Registration: {{ vehicle.registration }}</b-card-text>
-            <b-button href="#" variant="primary">Go somewhere</b-button>
+            <b-button variant="primary" @click="trafficStopBegins">Stop vehicle</b-button>
         </b-card>
+        
     </div>
 </template>
 
 <script>
+import { eventBus } from "@/main";
 export default {
     name: "TrafficStopComponent",
     data() {
@@ -90,7 +92,7 @@ export default {
         getDocumentStatus(random, documentType) {
             const EXPIRED_PROBABILITY = 10;
             const NO_DOCUMENT_PROBABILITY = 5;
-            
+
             if (random <= EXPIRED_PROBABILITY) {
                 return "Expired";
             } else if (random <= EXPIRED_PROBABILITY + NO_DOCUMENT_PROBABILITY) {
@@ -100,7 +102,9 @@ export default {
             }
         },
 
-
+        trafficStopBegins() {
+            eventBus.$emit('openTrafficStopModal', this.vehicle);
+        },
     }
 }
 </script>
