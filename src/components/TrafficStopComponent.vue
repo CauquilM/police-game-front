@@ -5,7 +5,7 @@
             <b-card-text>Registration: {{ vehicle.registration }}</b-card-text>
             <b-button variant="primary" @click="trafficStopBegins">Stop vehicle</b-button>
         </b-card>
-        
+
     </div>
 </template>
 
@@ -65,6 +65,9 @@ export default {
 
             // Vehicle registration
             this.documentInitializer("registration");
+
+            // Insurance date
+            this.generateInsuranceDate();
         },
 
         licensePlateInitializer() {
@@ -101,7 +104,29 @@ export default {
                 return "Valid";
             }
         },
+        generateInsuranceDate() {
+            // Get the current date
+            const currentDate = new Date();
 
+            // Generate a random number of days to add (e.g., up to 365 days in the future)
+            const randomDaysToAdd = Math.floor(Math.random() * 365) + 1;
+
+            // Calculate the future date
+            const futureDate = new Date(currentDate);
+            if (this.vehicle.insurance == "Expired") {
+                futureDate.setDate(currentDate.getDate() - randomDaysToAdd);
+            }
+            else if (this.vehicle.insurance == "No insurance") {
+                return 
+            }
+
+            // Format the date to yyyy-mm-dd
+            const year = futureDate.getFullYear();
+            const month = String(futureDate.getMonth() + 1).padStart(2, '0');
+            const day = String(futureDate.getDate()).padStart(2, '0');
+
+            console.log(`date ${day}-${month}-${year}`);
+        },
         trafficStopBegins() {
             eventBus.$emit('openTrafficStopModal', this.vehicle);
         },
