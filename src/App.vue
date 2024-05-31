@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="bg-primary">
+  <div id="app" class="bg-info">
     <div id="game" class="pt-4">
       <TrafficStopView/>
     </div>
